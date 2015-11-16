@@ -62,6 +62,10 @@ host-mode: auto
 # packet size (MTU + hardware header) on your system.
 #default-packet-size: 1514
 
+# configurable umask for output files created by suricata. Please note that this
+# value will be subtracted to the default one as set by the system
+umask: 002
+
 # The default logging directory.  Any log or output file will be
 # placed here if its not specified with a full path name.  This can be
 # overridden with the -l command line parameter.

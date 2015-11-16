@@ -23,6 +23,7 @@
 
 #include "suricata-common.h"
 #include "config.h"
+#include "conf.h"
 #include "suricata.h"
 #include "util-byte.h"
 #include "util-debug.h"
@@ -203,6 +204,26 @@ int ParseSizeStringU64(const char *size, uint64_t *res)
 
     return 0;
 }
+
+/**
+ * \brief Set a default umask for output files
+ */
+void UtilSetUmask(void)
+{
+    mode_t default_mask = 0002;
+    mode_t mask = default_mask;
+    ConfNode *node = ConfGetNode("umask");
+
+    if (node != NULL) {
+        mask = strtol(node->val, NULL, 8);
+        if (errno == ERANGE)
+            mask = default_mask;
+    }
+
+    SCLogInfo("Setting umask to %o", mask);
+    umask(mask);
+}
+
 
 /*********************************Unittests********************************/
 

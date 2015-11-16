@@ -2230,6 +2230,9 @@ int main(int argc, char **argv)
      * logging module. */
     SCLogLoadConfig(suri.daemon, suri.verbose);
 
+    /* initialize umask */
+    UtilSetUmask();
+
     SCPrintVersion();
 
     UtilCpuPrintSummary();
