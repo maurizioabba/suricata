@@ -1495,6 +1495,20 @@
 
         AC_DEFINE([HAVE_NAPATECH],[1],(Napatech capture card support))
     fi
+ 
+  # Check for SSE support levels
+    AC_ARG_ENABLE(sse,
+            AC_HELP_STRING([--enable-sse],[compile with SSE extension]),,[enable_sse=no])
+    AS_IF([test "x$enable_sse" = "xyes"],
+        AX_INTEL_FEATURES()
+    )
+    CFLAGS="${CFLAGS} ${INTEL_FLAGS}"
+    test -n "${INTEL_SSE_FLAGS}" && sse_support="SSE"
+    test -n "${INTEL_SSE2_FLAGS}" && sse_support="${sse_support} SSE2"
+    test -n "${INTEL_SSE3_FLAGS}" && sse_support="${sse_support} SSE3"
+    test -n "${INTEL_SSE4_1_FLAGS}" && sse_support="${sse_support} SSE4.1"
+    test -n "${INTEL_SSE4_2_FLAGS}" && sse_support="${sse_support} SSE4.2"
+    test -z "${sse_support}" && sse_support="none"
 
   # liblua
     AC_ARG_ENABLE(lua,
@@ -1868,6 +1882,7 @@ SURICATA_BUILD_CONF="Suricata Configuration:
   Profiling enabled:                       ${enable_profiling}
   Profiling locks enabled:                 ${enable_profiling_locks}
   Coccinelle / spatch:                     ${enable_coccinelle}
+  SSE support levels:                      ${sse_support}
 
 Generic build parameters:
   Installation prefix:                     ${prefix}

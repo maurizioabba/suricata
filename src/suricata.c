@@ -712,13 +712,13 @@ void SCPrintBuildInfo(void)
 
     /* SIMD stuff */
     memset(features, 0x00, sizeof(features));
-#if defined(__SSE4_2__)
+#if defined(HAVE_SSE4_2)
     strlcat(features, "SSE_4_2 ", sizeof(features));
 #endif
-#if defined(__SSE4_1__)
+#if defined(HAVE_SSE4_1)
     strlcat(features, "SSE_4_1 ", sizeof(features));
 #endif
-#if defined(__SSE3__)
+#if defined(HAVE_SSE3)
     strlcat(features, "SSE_3 ", sizeof(features));
 #endif
 #if defined(__tile__)

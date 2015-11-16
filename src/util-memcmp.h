@@ -54,7 +54,7 @@ MemcmpLowercase(const void *s1, const void *s2, size_t n)
     return 0;
 }
 
-#if defined(__SSE4_2__)
+#if defined(HAVE_SSE4_2)
 
 #include <nmmintrin.h>
 
@@ -142,7 +142,7 @@ static inline int SCMemcmpLowercase(const void *s1, const void *s2, size_t n)
     return ((m == n) ? 0 : 1);
 }
 
-#elif defined(__SSE4_1__)
+#elif defined(HAVE_SSE4_1)
 
 #include <smmintrin.h>
 
@@ -252,7 +252,7 @@ static inline int SCMemcmpLowercase(const void *s1, const void *s2, size_t len)
 
 
 
-#elif defined(__SSE3__)
+#elif defined(HAVE_SSE3)
 
 #include <pmmintrin.h> /* for SSE3 */
 

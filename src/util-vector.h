@@ -24,7 +24,7 @@
 #ifndef __UTIL_VECTOR_H__
 #define __UTIL_VECTOR_H__
 
-#if defined(__SSE3__)
+#if defined(HAVE_SSE3)
 
 #include <pmmintrin.h>
 
@@ -38,6 +38,6 @@ typedef struct Vector_ {
     };
 } Vector __attribute((aligned(16)));
 
-#endif /* defined(__SSE3__) */
+#endif /* defined(HAVE_SSE3) */
 
 #endif /* __UTIL_VECTOR_H__ */

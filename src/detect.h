@@ -989,7 +989,7 @@ typedef struct SigGroupHead_ {
 
     /** array of masks, used to check multiple masks against
      *  a packet using SIMD. */
-#if defined(__SSE3__) || defined(__tile__)
+#if defined(HAVE_SSE3) || defined(__tile__)
     SignatureMask *mask_array;
 #endif
 
